@@ -1,0 +1,124 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+table.issues th {
+    text-align: center;
+}
+
+table.issues ul.task-list {
+    min-height: 100px;
+}
+
+table.issues li footer {
+    margin-top: 0.5em;
+    min-height: 1em;
+}
+
+table.issues li header {
+    text-align: center;
+    padding-bottom: 0.5em;
+}
+
+table.issues .issue-number:before {
+    content: "#";
+}
+
+table.issues .issue-number {
+    font-weight: bold;
+}
+
+
+table.issues .estimate {
+    position: absolute;
+}
+
+table.issues .low {
+    left: 5px;
+}
+
+table.issues .high {
+    right: 5px;
+}
+
+table.issues .target {
+    position: absolute;
+    left: 5px;
+}
+
+table.issues .trigger {
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+}
+
+table.issues .issue-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+
+    width: 350px;
+    height: 250px;
+
+    margin-left: -175px;
+    margin-top: -125px;
+
+    display: none;
+
+    background-color: white;
+    border: 1px solid #333;
+    border-radius: 5px;
+
+    padding: 15px;
+    z-index: 1;
+
+    overflow: auto;
+}
+
+table.issues .trigger.selected + .issue-content {
+    display: block;
+}
+
+table.issues .trigger.selected,
+table.issues .trigger:hover {
+    color: red;
+}

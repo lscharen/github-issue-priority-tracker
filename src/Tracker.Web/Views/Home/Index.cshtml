@@ -1,0 +1,73 @@
+﻿@model Tracker.Web.ViewModels.OpenIssues
+@{
+    ViewBag.Title = "Home Page";
+}
+@functions {
+    bool IsLight(string color)
+    {
+        var r = Convert.ToInt32(color.Substring(0, 2), 16);
+        var g = Convert.ToInt32(color.Substring(2, 2), 16);
+        var b = Convert.ToInt32(color.Substring(4, 2), 16);
+
+        var brightness = Math.Sqrt(0.299 * r * r + 0.587 * g * g + 0.114 * b * b);
+        return brightness > 130;
+    }
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <h2>Current Issues</h2>
+        <table class="table issues">
+            <thead>
+                <tr>
+                    @foreach (var user in Model.Assignments.Keys)
+                    {
+                        <th>
+                            @user
+                        </th>
+                    }
+                </tr>
+            </thead>
+            <tfoot>
+
+            </tfoot>
+            <tbody>
+                <tr>
+                    @foreach (var issues in Model.Assignments)
+                    {
+                        <td>
+                            <ul class="task-list list-group" data-username="@issues.Key">
+                                @foreach (var issue in issues.Value)
+                                {
+                                    <li class="list-group-item" data-github-issue="@issue.Number">
+                                        <header>
+                                            <span class="estimate low">@issue.Metadata().Low.AsHumanizedTimeSpan()</span>
+                                            <a href="@issue.HtmlUrl">
+                                                <span class="issue-number">@issue.Number</span>
+                                            </a>
+                                            <span class="estimate high">@issue.Metadata().High.AsHumanizedTimeSpan()</span>
+                                        </header>
+                                        <h4 class="list-group-item-heading">@issue.Title</h4>
+                                        <p class="body">                                            
+                                            <span class="trigger"><span class="glyphicon glyphicon-info-sign"></span></span>
+                                            <span class="issue-content">@issue.Body</span>
+                                        </p>
+                                        <div>
+                                            @foreach (var label in issue.Labels)
+                                            {
+                                                <span style="background-color: #@label.Color" class="badge"><span style="color: @(IsLight(label.Color) ? "black" : "white")">@label.Name</span></span>
+                                            }
+                                        </div>
+                                        <footer>
+                                            <span class="target">@issue.Metadata().Target</span>
+                                        </footer>
+                                    </li>
+                                }
+                            </ul>
+                        </td>                        
+                    }
+                </tr>
+            </tbody>
+        </table>        
+    </div>
+</div>
